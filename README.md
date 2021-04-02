@@ -7,5 +7,6 @@ karena saya mengguanakan gambar tersebut mepet hari dan aplikasi ini juga masih 
 Screenshot
 <div>
   <center>
-    <img src=https://github.com/romadebrian/Visual-Basic-6---Play-GIF/blob/main/Screenshot.png width=700 height=400 />
+    <img src=https://github.com/romadebrian/Nalla-Nyanyan---Game-Visual-Basic-6.0/blob/main/Screenshot1.png width=700 height=400 />
+	<img src=https://github.com/romadebrian/Nalla-Nyanyan---Game-Visual-Basic-6.0/blob/main/Screenshot2.png width=700 height=400 />
 </div>
