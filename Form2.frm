@@ -1,11 +1,12 @@
 VERSION 5.00
 Begin VB.Form Menu 
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "Form2"
+   Caption         =   "Nalla Nyanyanya"
    ClientHeight    =   7050
    ClientLeft      =   45
    ClientTop       =   375
    ClientWidth     =   13470
+   Icon            =   "Form2.frx":0000
    LinkTopic       =   "Form2"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -42,7 +43,7 @@ Begin VB.Form Menu
    Begin VB.Image Image9 
       Height          =   840
       Left            =   120
-      Picture         =   "Form2.frx":0000
+      Picture         =   "Form2.frx":0CCA
       Stretch         =   -1  'True
       Top             =   195
       Visible         =   0   'False
@@ -51,7 +52,7 @@ Begin VB.Form Menu
    Begin VB.Image Image8 
       Height          =   780
       Left            =   120
-      Picture         =   "Form2.frx":1814
+      Picture         =   "Form2.frx":24DE
       Stretch         =   -1  'True
       Top             =   240
       Width           =   975
@@ -59,15 +60,15 @@ Begin VB.Form Menu
    Begin VB.Image Image7 
       Height          =   4935
       Left            =   9480
-      Picture         =   "Form2.frx":2248
+      Picture         =   "Form2.frx":2F12
       Stretch         =   -1  'True
-      Top             =   2400
+      Top             =   2880
       Width           =   4215
    End
    Begin VB.Image Image6 
       Height          =   5400
       Left            =   -240
-      Picture         =   "Form2.frx":46AEA
+      Picture         =   "Form2.frx":477B4
       Stretch         =   -1  'True
       Top             =   1680
       Width           =   5160
@@ -75,7 +76,7 @@ Begin VB.Form Menu
    Begin VB.Image Image5 
       Height          =   885
       Left            =   4680
-      Picture         =   "Form2.frx":7503B
+      Picture         =   "Form2.frx":75D05
       Stretch         =   -1  'True
       Top             =   5520
       Width           =   4305
@@ -83,7 +84,7 @@ Begin VB.Form Menu
    Begin VB.Image Image4 
       Height          =   885
       Left            =   4680
-      Picture         =   "Form2.frx":76444
+      Picture         =   "Form2.frx":7710E
       Stretch         =   -1  'True
       Top             =   4440
       Width           =   4305
@@ -91,15 +92,15 @@ Begin VB.Form Menu
    Begin VB.Image Image3 
       Height          =   885
       Left            =   4680
-      Picture         =   "Form2.frx":7793E
+      Picture         =   "Form2.frx":78608
       Stretch         =   -1  'True
       Top             =   3360
       Width           =   4305
    End
    Begin VB.Image Image2 
-      Height          =   1095
+      Height          =   1215
       Left            =   4200
-      Picture         =   "Form2.frx":78DC5
+      Picture         =   "Form2.frx":79A8F
       Stretch         =   -1  'True
       Top             =   2040
       Width           =   5295
@@ -107,7 +108,7 @@ Begin VB.Form Menu
    Begin VB.Image Image1 
       Height          =   7155
       Left            =   0
-      Picture         =   "Form2.frx":7AA01
+      Picture         =   "Form2.frx":7B6CB
       Stretch         =   -1  'True
       Top             =   0
       Width           =   13498
@@ -121,9 +122,11 @@ Attribute VB_Exposed = False
 Private Declare Sub Sleep Lib "kernel32.dll" (ByVal dwMilliseconds As Long)
 Option Explicit
 Public Sound
+Public status_form_main As Integer
 
 Private Sub Form_Load()
 Sound = "On"
+status_form_main = 0
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -137,14 +140,6 @@ End Sub
 
 Private Sub Image3_Click()
 Score.Show
-End Sub
-
-Private Sub Image3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-Image3.Picture = LoadPicture(App.Path & "\Interface\Score2.gif")
-End Sub
-
-Private Sub Image3_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-Image3.Picture = LoadPicture(App.Path & "\Interface\Score.gif")
 End Sub
 
 Private Sub Image4_Click()
@@ -161,6 +156,30 @@ End Sub
 
 Private Sub Image2_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
 Image2.Picture = LoadPicture(App.Path & "\Interface\Play.gif")
+End Sub
+
+Private Sub Image3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Image3.Picture = LoadPicture(App.Path & "\Interface\Score2.gif")
+End Sub
+
+Private Sub Image3_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Image3.Picture = LoadPicture(App.Path & "\Interface\Score.gif")
+End Sub
+
+Private Sub Image4_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Image4.Picture = LoadPicture(App.Path & "\Interface\About2.gif")
+End Sub
+
+Private Sub Image4_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Image4.Picture = LoadPicture(App.Path & "\Interface\About.gif")
+End Sub
+
+Private Sub Image5_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Image5.Picture = LoadPicture(App.Path & "\Interface\Exit2.gif")
+End Sub
+
+Private Sub Image5_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Image5.Picture = LoadPicture(App.Path & "\Interface\Exit.gif")
 End Sub
 
 Private Sub Image8_Click()

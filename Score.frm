@@ -108,5 +108,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Command1_Click()
-Unload Me
+If Menu.status_form_main = 1 Then
+    Unload Main
+    Unload Score
+Else
+    Unload Me
+End If
 End Sub
