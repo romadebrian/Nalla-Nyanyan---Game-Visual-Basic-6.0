@@ -27,17 +27,54 @@ Begin VB.Form Main
    End
    Begin VB.Image KejuBusuk 
       Height          =   1200
+      Index           =   2
+      Left            =   9840
+      Picture         =   "Form1.frx":0CCA
+      Stretch         =   -1  'True
+      Top             =   4200
+      Width           =   1200
+   End
+   Begin VB.Image KejuBusuk 
+      Height          =   1200
+      Index           =   1
+      Left            =   6960
+      Picture         =   "Form1.frx":35E8
+      Stretch         =   -1  'True
+      Top             =   3480
+      Width           =   1200
+   End
+   Begin VB.Image Keju 
+      Height          =   1200
+      Index           =   2
+      Left            =   9720
+      Picture         =   "Form1.frx":5F06
+      Stretch         =   -1  'True
+      Top             =   1680
+      Width           =   1200
+   End
+   Begin VB.Image Keju 
+      Height          =   1200
+      Index           =   1
+      Left            =   11040
+      Picture         =   "Form1.frx":8ABE
+      Stretch         =   -1  'True
+      Top             =   480
+      Width           =   1200
+   End
+   Begin VB.Image KejuBusuk 
+      Height          =   1200
       Index           =   0
       Left            =   8520
-      Picture         =   "Form1.frx":0CCA
+      Picture         =   "Form1.frx":B676
       Stretch         =   -1  'True
       Top             =   4200
       Width           =   1200
    End
    Begin VB.Image Keju 
       Height          =   1200
+      Index           =   0
       Left            =   11400
-      Picture         =   "Form1.frx":35E8
+      Picture         =   "Form1.frx":DF94
       Stretch         =   -1  'True
       Top             =   2400
       Width           =   1200
@@ -86,7 +123,7 @@ Begin VB.Form Main
    Begin VB.Image Image2 
       Height          =   495
       Left            =   240
-      Picture         =   "Form1.frx":61A0
+      Picture         =   "Form1.frx":10B4C
       Stretch         =   -1  'True
       Top             =   240
       Width           =   2160
@@ -94,7 +131,7 @@ Begin VB.Form Main
    Begin VB.Image CharNalla 
       Height          =   975
       Left            =   360
-      Picture         =   "Form1.frx":6860
+      Picture         =   "Form1.frx":1120C
       Stretch         =   -1  'True
       Top             =   2760
       Width           =   1935
@@ -135,7 +172,7 @@ Begin VB.Form Main
    Begin VB.Image Image1 
       Height          =   7125
       Left            =   0
-      Picture         =   "Form1.frx":9B37
+      Picture         =   "Form1.frx":144E3
       Stretch         =   -1  'True
       Top             =   0
       Width           =   13665
@@ -150,6 +187,8 @@ Dim xpos As Single, ypos As Single
 Dim score_poin As Integer
 Dim loc As Integer
 Dim hasil_loc As Integer
+Dim jam
+Dim tanggal
 
 Private Declare Function sndPlaySound Lib "winmm.dll" Alias "sndPlaySoundA" (ByVal lpszSoundName As String, ByVal uFlags As Long) As Long
 
@@ -157,6 +196,7 @@ Private Sub Form_Load()
 Dim loc As String
 
 Menu.status_form_main = 1
+score_poin = 0
 
 'loc = App.Path & "\test.gif"
 'CharNalla.Navigate "about:" & "<html>" & "<body leftMargin=0 topMargin=0 marginheight=0 marginwidth=0 scroll=no>" _
@@ -169,14 +209,15 @@ Menu.status_form_main = 1
 CharNalla.Left = 0
 CharNalla.Top = 1500
 
-Keju.Top = 2500
-Keju.Left = 13000
+For i = 0 To Keju.Count - 1
+    Keju(i).Top = 2500
+    Keju(i).Left = 13000
+Next
 
 For i = 0 To KejuBusuk.Count - 1
     KejuBusuk(i).Top = 4500
     KejuBusuk(i).Left = 14000
 Next
-
     
 If Menu.Sound = "On" Then
     WindowsMediaPlayer1.settings.volume = 100
@@ -221,13 +262,19 @@ Menu.Show
 End Sub
 
 Private Sub Timer1_Timer()
-Keju.Left = Keju.Left - 500
+For i = 0 To Keju.Count - 1
+    Keju(i).Left = Keju(i).Left - 500
+Next
 
-If Keju.Left < 0 Then
-    Keju.Left = 13000
-    Lokasi
-    Keju.Top = hasil_loc
-End If
+For i = 0 To Keju.Count - 1
+    If Keju(i).Left < 0 Then
+        Keju(i).Left = 13000
+        Lokasi
+        Keju(i).Top = hasil_loc
+    End If
+Next
+
+'=====================================================
 
 For i = 0 To KejuBusuk.Count - 1
     KejuBusuk(i).Left = KejuBusuk(i).Left - 500
@@ -243,24 +290,37 @@ Next
 End Sub
 
 Private Sub Timer2_Timer()
-If (CharNalla.Left = Keju.Left) And CharNalla.Top = Keju.Top Then
-    Keju.Left = 13000
-    score_poin = score_poin + 10
-    Label2.Caption = score_poin
-    
-    sndPlaySound App.Path & "\hit.wav", 1 Or 2
-    Lokasi
-    Keju.Top = hasil_loc
-End If
+For i = 0 To Keju.Count - 1
+    If (CharNalla.Left = Keju(i).Left) And CharNalla.Top = Keju(i).Top Then
+        Keju(i).Left = 13000
+        score_poin = score_poin + 10
+        Label2.Caption = score_poin
+        
+        sndPlaySound App.Path & "\hit.wav", 1 Or 2
+        Lokasi
+        Keju(i).Top = hasil_loc
+    End If
+Next
 
 For i = 0 To KejuBusuk.Count - 1
     If (CharNalla.Left = KejuBusuk(i).Left) And CharNalla.Top = KejuBusuk(i).Top Then
-    MsgBox "Game Over"
+    'MsgBox "Game Over"
     Timer1.Enabled = False
     Timer2.Enabled = False
+    
+    Score.List1.Clear
     Score.List1.AddItem Label2.Caption
     Score.simpan_score
-    Score.Show
+    
+    jam = Time
+    tanggal = Date
+    
+    Score.List2.Clear
+    Score.List2.AddItem Time + Date
+    Score.simpan_waktu
+    
+    GameOver.Label2.Caption = score_poin
+    GameOver.Show
     End If
 Next
 End Sub
