@@ -15,6 +15,11 @@ Begin VB.Form Main
    ScaleHeight     =   7080
    ScaleWidth      =   12915
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Timer Time_Animasi 
+      Interval        =   100
+      Left            =   11040
+      Top             =   5520
+   End
    Begin VB.Timer Timer2 
       Interval        =   1
       Left            =   11520
@@ -189,11 +194,14 @@ Dim loc As Integer
 Dim hasil_loc As Integer
 Dim jam
 Dim tanggal
+Dim pic As Integer
 
 Private Declare Function sndPlaySound Lib "winmm.dll" Alias "sndPlaySoundA" (ByVal lpszSoundName As String, ByVal uFlags As Long) As Long
 
 Private Sub Form_Load()
 Dim loc As String
+
+pic = 1
 
 Menu.status_form_main = 1
 score_poin = 0
@@ -210,13 +218,19 @@ CharNalla.Left = 0
 CharNalla.Top = 1500
 
 For i = 0 To Keju.Count - 1
-    Keju(i).Top = 2500
-    Keju(i).Left = 13000
+    Lokasi
+    Keju(i).Top = hasil_loc
+    Keju(0).Left = 13000
+    Keju(1).Left = 14000
+    Keju(2).Left = 15000
 Next
 
 For i = 0 To KejuBusuk.Count - 1
-    KejuBusuk(i).Top = 4500
-    KejuBusuk(i).Left = 14000
+    Lokasi
+    KejuBusuk(i).Top = hasil_loc
+    KejuBusuk(0).Left = 15000
+    KejuBusuk(1).Left = 16000
+    KejuBusuk(2).Left = 17000
 Next
     
 If Menu.Sound = "On" Then
@@ -259,6 +273,28 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
 status_form = 0
 Menu.Show
+End Sub
+
+Private Sub Time_Animasi_Timer()
+pic = pic + 1
+
+'pakai array dan ubah nama file jadi 123456
+
+Select Case pic
+    Case 1
+        CharNalla.Picture = LoadPicture(App.Path & "\CatNalla\1.gif")
+    Case 2
+        CharNalla.Picture = LoadPicture(App.Path & "\CatNalla\2.gif")
+    Case 3
+        CharNalla.Picture = LoadPicture(App.Path & "\CatNalla\3.gif")
+    Case 4
+        CharNalla.Picture = LoadPicture(App.Path & "\CatNalla\4.gif")
+    Case 5
+        CharNalla.Picture = LoadPicture(App.Path & "\CatNalla\5.gif")
+    Case 6
+        CharNalla.Picture = LoadPicture(App.Path & "\CatNalla\6.gif")
+        pic = 1
+End Select
 End Sub
 
 Private Sub Timer1_Timer()
