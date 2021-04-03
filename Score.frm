@@ -115,3 +115,30 @@ Else
     Unload Me
 End If
 End Sub
+
+Private Sub Form_Load()
+Dim ff As Long
+Dim line As String
+
+List1.Clear
+
+ff = FreeFile
+Open App.Path & "\score.txt" For Input As #ff
+Do While Not EOF(ff)
+       Line Input #ff, line
+       'make sure we're not adding a blank line
+       If Len(line) Then List1.AddItem line
+Loop
+Close #ff
+End Sub
+
+Sub simpan_score()
+Dim i As Integer
+
+Open App.Path & "\score.txt" For Append As #1 'Drive penyimpanan
+
+For i = 0 To List1.ListCount - 1
+    Print #1, List1.List(i)
+Next
+Close #1
+End Sub

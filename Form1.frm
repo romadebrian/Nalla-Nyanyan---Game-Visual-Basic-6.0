@@ -258,6 +258,8 @@ For i = 0 To KejuBusuk.Count - 1
     MsgBox "Game Over"
     Timer1.Enabled = False
     Timer2.Enabled = False
+    Score.List1.AddItem Label2.Caption
+    Score.simpan_score
     Score.Show
     End If
 Next
@@ -301,6 +303,7 @@ Load KejuBusuk(k)
 KejuBusuk(k).Visible = True
 
 End Sub
+
 
 
 
