@@ -47,7 +47,9 @@ Begin VB.Form Score
    Begin VB.ListBox List1 
       Appearance      =   0  'Flat
       Height          =   3735
+      ItemData        =   "Score.frx":0000
       Left            =   1440
+      List            =   "Score.frx":0002
       TabIndex        =   0
       Top             =   3000
       Width           =   2000
@@ -96,7 +98,7 @@ Begin VB.Form Score
    Begin VB.Image Image1 
       Height          =   7575
       Left            =   -120
-      Picture         =   "Score.frx":0000
+      Picture         =   "Score.frx":0004
       Stretch         =   -1  'True
       Top             =   0
       Width           =   7100
@@ -116,20 +118,39 @@ Else
 End If
 End Sub
 
-Private Sub Form_Load()
+Private Sub Form_Activate()
 Dim ff As Long
 Dim line As String
+Dim ff2 As Long
+Dim line2 As String
 
 List1.Clear
+List2.Clear
 
 ff = FreeFile
 Open App.Path & "\score.txt" For Input As #ff
 Do While Not EOF(ff)
-       Line Input #ff, line
-       'make sure we're not adding a blank line
-       If Len(line) Then List1.AddItem line
+    Line Input #ff, line
+    'make sure we're not adding a blank line
+    If Len(line) Then
+        List1.AddItem line
+        List1.ListIndex = List1.ListCount - 1
+    End If
 Loop
 Close #ff
+
+ff2 = FreeFile
+Open App.Path & "\waktu.txt" For Input As #ff2
+Do While Not EOF(ff2)
+    Line Input #ff2, line2
+    'make sure we're not adding a blank line
+    If Len(line2) Then
+        List2.AddItem line2
+        List2.ListIndex = List2.ListCount - 1
+    End If
+Loop
+Close #ff
+
 End Sub
 
 Sub simpan_score()
@@ -141,4 +162,15 @@ For i = 0 To List1.ListCount - 1
     Print #1, List1.List(i)
 Next
 Close #1
+End Sub
+
+Sub simpan_waktu()
+Dim i2 As Integer
+
+Open App.Path & "\waktu.txt" For Append As #2 'Drive penyimpanan
+
+For i2 = 0 To List2.ListCount - 1
+    Print #2, List2.List(i2)
+Next
+Close #2
 End Sub
